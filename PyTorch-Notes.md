@@ -20,4 +20,7 @@
 
 - The purpose of the "requires_grad" argument when creating a tensor is to compute derivates with respect to these variables. 
 - Once we set requires_grad = True, whenever we apply an operation to this tensor, the operation will be tracked and the computation to get the derivative of the original tensors variables will be tracked. For example: if x is a tensor, then y=x+2, y is also a tensor. y will be stored with grad_fn = "AddBackward0" which indicates how to get the derivative of x from y.
-- The "backward" method can be called to compute intermediate derivates. Consider if z = y * y(element wise), y = x+2. Then z.backward() will compute dz, while keeping track how the derivate of y can be obtained from this. Then from dy we can compute dx. 
+- The "backward" method can be called to compute intermediate derivates. Consider if z = y * y(element wise), y = x+2. Then z.backward() will compute dz/dy, then computes dy/dx, then applies Chain Rule. 
+- These "steps" form a Dynamic Computation Graph which is stored when operations are written. 
+- Graph nodes tend to be variables and arrows are mathematical operations. 
+
