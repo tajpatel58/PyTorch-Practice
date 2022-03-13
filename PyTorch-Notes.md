@@ -44,4 +44,7 @@
 - The model params can be retrieved with "model.parameters()".
 
 
-
+### Processing Data: 
+- Note an Epoch is the number of times the entire dataset will be parsed into the optimizer. 
+- If we're dealing with big datasets, then we should parse out data into the optimizer in Batches. 
+- This is where the "Datasets" and "Dataloaders" objects are useful. Dataset objects are given as arguments into Dataloaders. Dataloaders are used to used to wrap an iterable around the dataset, that way we can parse out data into batches to our optimizers. 
