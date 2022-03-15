@@ -70,3 +70,13 @@
 - Given a k-class classification problem, we apply the Softmax function to the k-dimensional vector returned from the neural net to give a vector of probabilities where the ith value is the probability of belonging to the ith class. 
 - The Cross Entropy function takes in 2 arguments: one is the the output vector of a neural net, the second is the actual class that the data point that was fed through the network corresponds to.
 - The CE function applies the softmax function to an ouput of a Neural Net and computes the classification error as: -log(p_i) where p_i is the probability of the datapoint belonging to the class. This makes intuitive sense, if the probability is 1, then we get the error as 0, and the smaller p_i is, the progressively larger the error becomes. In other words if the probability of the datapoint actually belonging to the class is small (according to our model), then the error is large. 
+
+
+### Activation Functions:
+- Activation functions are applied between layers of a Neural Net, some activation functions have particular use cases which I'll outline below.
+- Used in Binary Logistic regression to associate probability to classes. 
+- TanH - Used in the hidden layers. Values between (-1,1). 
+- ReLU = max(0,x), rule of thumb: use ReLU when we have no prior idea of the activation function. 
+- Leaky ReLU is like ReLU for x>0, but for x<0, we return a*x where a is some gradient. This function is used to try solve the vanishing gradient problem: In particular recall the Backpropogation step requires the derivative of the activation function. A plot of the ReLU shows it has a 0 derivative for x<0, this means that the values at these nodes in our Neural net will never be updated. A good idea is if weights aren't updating through SGD, then this we can try the Leaky ReLU. 
+- Softmax used for multiclass classifiction in the final layer. 
+- These activation functions can be found in the "nn" module in PyTorch
