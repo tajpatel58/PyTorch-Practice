@@ -45,6 +45,22 @@
 
 
 ### Processing Data: 
+
+#### Datasets and Dataloaders:
+
 - Note an Epoch is the number of times the entire dataset will be parsed into the optimizer. 
 - If we're dealing with big datasets, then we should parse out data into the optimizer in Batches. 
 - This is where the "Datasets" and "Dataloaders" objects are useful. Dataset objects are given as arguments into Dataloaders. Dataloaders are used to used to wrap an iterable around the dataset, that way we can parse out data into batches to our optimizers. 
+- To do this, we should create a class which inherits from the Dataset class. Define the __getitem__, __len__, __init__ methods. Note for the __getitem__ method, we should output a tuple with the datapoint and the target. 
+- Parse this dataset object into the Dataloader so we can then loop through our data. Dataloaders take in some useful __keyword__ arguments: batch_size, shuffle, num_workers (number of cores used). 
+
+#### Transforms:
+- Typically our data will need some form of preprocessing before it's parsed into our model. 
+- There are many built in transforms that we can use, a few examples are: rotations, grayscale, resize, casting tpyes. eg(numpy -> tensor)
+- We can also use custom transforms: for modularity, we should do this processing in a "transform" class. 
+- In our transform class we only need to define the "__call__" magic method containing what the transform should do to each datapoint. 
+- Recall, we parse the Dataset object into the Dataloader, all we need to do is ammend the __getitem__ magic method in the Dataset clas so that the datapoint that is returned has been transformed. As we've defined the "__call__" method, this can be done with a call to the class. 
+- Note: Parse the transformer instance as a keyword argument into the extended Dataset class, that way we can make use of the call functionality. 
+- Don't forget, the call method needs to be passed a "sample" to transform. 
+- The Compose object can take in a list of multiple transforms and return a new transform. Which we can use to apply multiple transforms in chronological order. 
+
