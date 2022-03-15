@@ -64,3 +64,9 @@
 - Don't forget, the call method needs to be passed a "sample" to transform. 
 - The Compose object can take in a list of multiple transforms and return a new transform. Which we can use to apply multiple transforms in chronological order. 
 
+### Softmax and Cross Entropy:
+- The Softmax function is used to assign probabilities by normalising a vector.
+- Given an n-dimensional vector of reals, it maps each by taking the exponent and dividing by the exponent of the sum of the values in the vector. 
+- Given a k-class classification problem, we apply the Softmax function to the k-dimensional vector returned from the neural net to give a vector of probabilities where the ith value is the probability of belonging to the ith class. 
+- The Cross Entropy function takes in 2 arguments: one is the the output vector of a neural net, the second is the actual class that the data point that was fed through the network corresponds to.
+- The CE function applies the softmax function to an ouput of a Neural Net and computes the classification error as: -log(p_i) where p_i is the probability of the datapoint belonging to the class. This makes intuitive sense, if the probability is 1, then we get the error as 0, and the smaller p_i is, the progressively larger the error becomes. In other words if the probability of the datapoint actually belonging to the class is small (according to our model), then the error is large. 
