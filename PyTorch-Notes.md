@@ -87,6 +87,6 @@
 - The typical architecture of a CNN will also involve a "pooling" layer. 
 - So what is a convolutional filter? 
 
-![](2022-03-24-21-03-20.png)
+![](./Graphics/2022-03-24-21-03-20.png)
 
 
