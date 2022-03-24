@@ -80,3 +80,13 @@
 - Leaky ReLU is like ReLU for x>0, but for x<0, we return a*x where a is some gradient. This function is used to try solve the vanishing gradient problem: In particular recall the Backpropogation step requires the derivative of the activation function. A plot of the ReLU shows it has a 0 derivative for x<0, this means that the values at these nodes in our Neural net will never be updated. A good idea is if weights aren't updating through SGD, then this we can try the Leaky ReLU. 
 - Softmax used for multiclass classifiction in the final layer. 
 - These activation functions can be found in the "nn" module in PyTorch
+
+
+### Convoluted Neural Networks: 
+- CNNs (Convoluted Neural Networks) are quite similar to Nerual Networks however they differ because of the convolutional layer in the network which entail applying a convolutional filter on some layers. 
+- The typical architecture of a CNN will also involve a "pooling" layer. 
+- So what is a convolutional filter? 
+
+![](2022-03-24-21-03-20.png)
+
+
