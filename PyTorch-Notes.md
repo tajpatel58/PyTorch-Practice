@@ -83,10 +83,18 @@
 
 
 ### Convoluted Neural Networks: 
-- CNNs (Convoluted Neural Networks) are quite similar to Nerual Networks however they differ because of the convolutional layer in the network which entail applying a convolutional filter on some layers. 
+- CNNs (Convoluted Neural Networks) are quite similar to Nerual Networks however they differ because of the convolutional layer in the network which entail applying a convolution filter on some layers. 
 - The typical architecture of a CNN will also involve a "pooling" layer. 
-- So what is a convolutional filter? 
+- So what is a convolution filter? 
 
 ![](./Graphics/2022-03-24-21-03-20.png)
+
+- The graphic above shows how a convolution filter is applied to a matrix. 
+- Essentially, the convolutional filter is a smaller dimension matrix which maps a matrix to a another matrix using the following process:
+    1. Place the filter matrix "over" the original matrix in a "window" like manner. 
+    2. Moving the convolution filter across the input matrix, will assign entries in the output matrix by taking an element wise sum. 
+    3. For example, if we had a 3x3 input matrix, and a 2x2 convolution filter, the output matrix will be a 2x2. 
+- Convolutional layers can be used to reduce the number of features throughout the layers of a neural network. 
+- An example would be if we applied a CNN to images which are usually 3D tensors. An RGB picture is made of pixels of different colours,(consider a 5x5 picture), each pixel has a corresponding R(red), G(green), B(blue) value between 0 and 255 (totalling 75 nodes on the input layer). We can think of these 3 colour groups as 3 5x5 matrices. We can apply a different convolutional filter to each of these matrices, say a 3x3 matrix. Doing this will output 3 3x3 matrices, reducing the number of features from 75 to 27. 
 
 
