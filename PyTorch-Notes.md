@@ -96,5 +96,15 @@
     3. For example, if we had a 3x3 input matrix, and a 2x2 convolution filter, the output matrix will be a 2x2. 
 - Convolutional layers can be used to reduce the number of features throughout the layers of a neural network. 
 - An example would be if we applied a CNN to images which are usually 3D tensors. An RGB picture is made of pixels of different colours,(consider a 5x5 picture), each pixel has a corresponding R(red), G(green), B(blue) value between 0 and 255 (totalling 75 nodes on the input layer). We can think of these 3 colour groups as 3 5x5 matrices. We can apply a different convolutional filter to each of these matrices, say a 3x3 matrix. Doing this will output 3 3x3 matrices, reducing the number of features from 75 to 27. 
+- If dealing with a 3D tensor, we call the depth or the 3rd dimension a channel, so when we say "the output has 6 channels", this means 6 layers of depth. 
+- The values in these convolution filters/kernels are are model parameters, ie their values are optimised in training. 
+- Now we can answer what a "pooling" layer is in our Neural Network:
+
+    1. A pooling layer is similar to a convolution filter in the sense that we used them to reduce the number of features between layers. 
+    2. Say we have a 2D matrix of features, to applying a pooling layer, we "cover"/"partition" our 2D matrix into smaller mutually exclusive matrices. 
+    3. Then we apply an operation on each of the sub-matrices, could max (Max Pooling), min (Min Pooling), avg (Average Pooling). 
+    4. This will map each submatrices to a scalar. 
+    5. Combine these scalars into a matrix to form the next layer in the Neural network. 
+    6. Max Pooling Example: consider a 4x4 matrix, which can be divided into 4 2x2 matrices. If we take the max of each of the sub-matrices, and arrange them to make a matrix, we then end gone up with a 2x2 matrix. (16 features -> 4 features in the next layer. ) 
 
 
