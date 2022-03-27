@@ -105,6 +105,7 @@
     3. Then we apply an operation on each of the sub-matrices, could max (Max Pooling), min (Min Pooling), avg (Average Pooling). 
     4. This will map each submatrices to a scalar. 
     5. Combine these scalars into a matrix to form the next layer in the Neural network. 
-    6. Max Pooling Example: consider a 4x4 matrix, which can be divided into 4 2x2 matrices. If we take the max of each of the sub-matrices, and arrange them to make a matrix, we then end gone up with a 2x2 matrix. (16 features -> 4 features in the next layer. ) 
+    6. Max Pooling Example: consider a 4x4 matrix, which can be divided into 4 2x2 matrices. If we take the max of each of the sub-matrices, and arrange them to make a matrix, we then end gone up with a 2x2 matrix. (16 features -> 4 features in the next layer.)
+- Reducing the number of features, reduces the chances of our model being overfit.  
 
 
