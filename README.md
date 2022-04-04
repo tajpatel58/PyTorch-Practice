@@ -23,3 +23,9 @@ I've currently got minimal experience with PyTorch however given it's wide appli
 - Creating a multi-layered Neural Network using the nn.Module, can view and how to use the Activation Functions and linear models to feed a datapoint through a Neural Net. 
 - Shows training data in Batches using: Dataloaders, Cross Entropy Loss, Adam optimiser. 
 - How to visualise tensors using Matplotlib. 
+
+#### Convolutional Neural Networks - Notebook: 
+
+- First implementation of a CNN on the Cifar-10 Dataset. 
+- Gives a step by step overview of how the model is being trained. 
+- Building familiarity with Pooling and Convolutional Filter layers to reduce feature size. 
