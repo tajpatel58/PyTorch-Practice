@@ -33,7 +33,16 @@ data_transforms = {
 
 
 # Initialise datasets and dataloaders:
+# Images obtained from a folder. 
 data = '<ENTER NAME OF FOLDER FOR DATA>'
 data_path = f'./Transfer_Learning_Data/{data}/'
 phases = ['Training', 'Testing']
 
+
+datasets_dict = {phase : datasets.ImageFolder(f'{data_path}{phase}',
+                         data_transforms[phase])
+                         for phase in phases}
+
+dataloaders = {phase : DataLoader(datasets_dict[phase], shuffle=True, 
+                                  batch_size=batch_size)
+                                  for phase in phases}
