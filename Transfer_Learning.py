@@ -107,9 +107,15 @@ def train_model(model, optimizer, num_epochs, lr_scheduler, loss_func):
         
         epoch_accuracy = np.float32(epoch_accuracy) / len(datasets_dict['Testing'])
         
+        #Register with the LR Scheduler that an epoch has been complete. 
+        # LR Scheduler changes the learning rate after a certain number of epochs. 
+        lr_scheduler.step()
+
         # After each epoch, store the model with the highest proportion of correct predictions.
         if epoch_accuracy >= best_testing_accuracy:
             best_model = model.state_dict()
             best_testing_accuracy = epoch_accuracy
     
     model.load_state_dict(best_model)
+
+    return model
