@@ -16,6 +16,7 @@ number_epochs = 5
 batch_size = 5
 mean = np.array([0.5, 0.5, 0.5])
 std = np.array([0.25, 0.25, 0.25])
+learning_rate = 0.001
 
 # Transforms: 
 data_transforms = {
@@ -50,7 +51,7 @@ dataloaders = {phase : DataLoader(datasets_dict[phase], shuffle=True,
                                   for phase in phases}
 
 #Defining a function to train our model: 
-def train_model(model, optimizer, num_epochs, lr_scheduler, loss_func):
+def train_model(model, optimizer, lr_scheduler, loss_func, num_epochs=10):
     """
     A function which applies the training loop for us. 
 
@@ -119,3 +120,27 @@ def train_model(model, optimizer, num_epochs, lr_scheduler, loss_func):
     model.load_state_dict(best_model)
 
     return model
+
+
+#Recall transfer lerning is the process of using an already trained model
+# and adjusting the classification/fully connected layers. This is a great idea when
+# dealing with image data, as the feature learning can be extended naturally to 
+# most images. 
+
+resnet_model = models.resnet18(pretrained=True)
+
+# Resnet18 model is used to classify images into 1000 classes.
+# We need to change the fully connected layer for our use case.
+num_new_classes = 2
+current_fc_input_ftrs = resnet_model.fc.in_features
+resnet_model.fc = nn.Linear(current_fc_input_ftrs, num_new_classes)
+
+
+#Initialise Optimizers, LR Schedulers, Loss Function, etc:
+optim = torch.optim.SGD(resnet_model.parameters(), lr=learning_rate)
+loss = nn.CrossEntropyLoss()
+# This learning rate schedular will multiply the current learning by gamma after
+# {step_size} epochs. 
+step_lr_scheduler = lr_scheduler.StepLR(optim, step_size=8, gamma=0.1)
+
+optimal_model = train_model(resnet_model, optim, step_lr_scheduler, loss, num_epochs=25)
