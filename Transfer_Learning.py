@@ -67,12 +67,13 @@ def train_model(model, optimizer, num_epochs, lr_scheduler, loss_func):
     """
 
     best_model = copy.deepcopy(model.state_dict())
-    best_testing_acc = 0
+    best_testing_accuracy = 0
 
     for epoch in range(num_epochs):
-        error = 0
         # Save the state of the model
         model_state = copy.deepcopy(model.state_dict())
+        epoch_accuracy = 0
+        epoch_loss = 0
 
         for phase in phases:
             if phase == 'Training':
@@ -82,6 +83,33 @@ def train_model(model, optimizer, num_epochs, lr_scheduler, loss_func):
                 # Set model to testing/validation mode. 
                 model.eval() 
 
-            for i, (data, labels) in enumerate(dataloaders[phase]):
-                predictions = model(data)
+            for batch_no, (data, labels) in enumerate(dataloaders[phase]):
                 
+                # If we are training, then we need to track the operations for the 
+                # optimiser. 
+                with torch.set_grad_enabled(phase == 'Training'):
+                    # Feed our batch through our Neural Network
+                    feed_forward = model(data)
+                    # Obtain the class predicted:
+                    # Note: torch.max outputs a tuple, (max, max_args)
+                    _, predictions = torch.max(feed_forward, axis=1)
+                    error = loss_func(predictions, labels)
+                
+                # If in the training phase, need to apply the optimisation step:
+                if phase == 'Training':
+                    error.backward()
+                    optimizer.step()
+                    optimizer.zero_grad()
+
+                if phase == 'Testing':
+                    epoch_accuracy += torch.sum(predictions == labels)
+                    epoch_loss += error.item()
+        
+        epoch_accuracy = np.float32(epoch_accuracy) / len(datasets_dict['Testing'])
+        
+        # After each epoch, store the model with the highest proportion of correct predictions.
+        if epoch_accuracy >= best_testing_accuracy:
+            best_model = model.state_dict()
+            best_testing_accuracy = epoch_accuracy
+    
+    model.load_state_dict(best_model)
