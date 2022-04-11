@@ -102,7 +102,8 @@ def train_model(model, optimizer, lr_scheduler, loss_func, num_epochs=10):
 
                 if phase == 'Testing':
                     epoch_accuracy += torch.sum(predictions == labels)
-                    epoch_loss += error.item()
+                    # Need to multiply by the batch_size. 
+                    epoch_loss += ( error.item() * data.size(0) )
         
         epoch_accuracy = np.float32(epoch_accuracy) / len(datasets_dict['Testing'])
         
