@@ -3,13 +3,11 @@
 # Import packages:
 import torch
 from torch import nn 
-from torch.optim import SGD 
 from torch.optim import lr_scheduler
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
 from torchvision import datasets, models, transforms
 import numpy as np
 import copy 
-import os
 
 # Hyperparameters: 
 number_epochs = 5
