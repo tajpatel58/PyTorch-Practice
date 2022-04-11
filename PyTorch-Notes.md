@@ -116,3 +116,15 @@
 - For example if we had a model that classifies cars into brands, we could then adapt this model to classify cars into brands and colours. 
 - Formally, a model that is already built for a first task, is used as the starting point for a second task. 
 - Transfer learning typically changes the Fully Connected layers weights but the Feature Learning layers weights will be the same as the pre-trained model. 
+
+
+### Tensorboard:
+- Tensorboard is a visualisation toolkit for machine learning models we build.
+- Some of the things we can do: 
+    1. Tracking model metrics - loss and accuracy. 
+    2. Viewing model architecture. 
+    3. Displaying images/data. 
+- Run "tensorboard logdir=runs" in terminal which will start tensorboard on the localhost. logdir is the path where the torch logs are stored. Defaulted to "runs". 
+- Want to use "Summary Writer" from torchvision.utils. This object has a lot of the functionality we'd like: writer.add_graph(model, data) (used to visiualise net), writer.add_images('image names'), writer.add_scalar('graph title, 'scalar plotted') etc. This object needs to be closed once instantiated, a bit like a context manager - writer.close()
+- Summary writer object takes in a path for where we store the logs for our model. This is good if we want to track multiple models on tensorboard. Just specify different directories when initialising the summary writers. 
+- Can also generate precision/recall curves. This is a way of determining the threshold for assigning to a class. Note the threshold is typically for binary classification (yes/no), thus to extend to multi-class classification we binarize (if thats a word :D) the output. Hence for each class, we will have a precision recall curve. 
