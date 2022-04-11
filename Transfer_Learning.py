@@ -129,6 +129,10 @@ def train_model(model, optimizer, lr_scheduler, loss_func, num_epochs=10):
 
 resnet_model = models.resnet18(pretrained=True)
 
+# Need to disable the training of the already trained parameters:
+for param in resnet_model.parameters():
+    param.requires_grad = True
+
 # Resnet18 model is used to classify images into 1000 classes.
 # We need to change the fully connected layer for our use case.
 num_new_classes = 2
