@@ -37,3 +37,11 @@ I've currently got minimal experience with PyTorch however given it's wide appli
 - Shows how to adapt the fully connected layers on the pretrained model for our use case. 
 - Built intuition on common transformations on image data. 
 - Explains how to save/load model params so we ultimately choose the params that had the highest epoch accuracy (or any other metric we'd like to use)
+
+
+
+#### Conclusion: 
+
+I feel I've built a good foundation with PyTorch and think it's time to move onto bigger projects. My first PyTorch project will be: Facebook Marketplace's Recommendation Ranking System. The aim of which will be to recommend products on Facebook based upon a users search history. 
+
+Facebook Project can be found on my Github. :) 
