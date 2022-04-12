@@ -128,3 +128,21 @@
 - Want to use "Summary Writer" from torchvision.utils. This object has a lot of the functionality we'd like: writer.add_graph(model, data) (used to visiualise net), writer.add_images('image names'), writer.add_scalar('graph title, 'scalar plotted') etc. This object needs to be closed once instantiated, a bit like a context manager - writer.close()
 - Summary writer object takes in a path for where we store the logs for our model. This is good if we want to track multiple models on tensorboard. Just specify different directories when initialising the summary writers. 
 - Can also generate precision/recall curves. This is a way of determining the threshold for assigning to a class. Note the threshold is typically for binary classification (yes/no), thus to extend to multi-class classification we binarize (if thats a word :D) the output. Hence for each class, we will have a precision recall curve. 
+
+
+### Saving and Loading Models:
+- Once a model has been trained, to use and deploy this model we need to save the model parameters. 
+- The params of a model are stored in the "state_dict" method.
+- For each layer in our network we typically have model params, with this layer-params correspondence, we can store the params in a dictionary. 
+- There are 3 main methods that we will use: torch.save, torch.load, model.load_state_dict(). 
+- Although we can save the entire model with "torch.save", we advise against it. This is because if we load in a model like this, we need the model class to also be defined within our script. 
+- Instead we should save and load the model parameters. (Which is a dictionary)
+- "torch.save()" can be used to save any dictionary, in particular it serialises the dictionary. (Converts the data from variable to a file that can be read/loaded.)
+- Saving/Loading the model will typically go: 
+    1. Saving: torch.save(model.state_dict(), 'SAVE_PATH/model_params.pth). 
+    2. Loading: torch.load('Path_of_Params/params.pth) (reads in the dict, not the model).
+    3. Loading Model: model.load_state_dict('Pass in Params loaded in step 2.')
+    4. model.eval() - Will set the model to evaluation mode. This is when we only need to predict and no longer train. 
+- Note optimisers also have a "state_dict" so we can store that in a similar way. Recall, 'torch.save()' stores dictionaries. 
+- We can store a model at a checkpoint, store the optimizer.state_dict() and the model.state_dict() as a dictionary. eg: checkpoint = {'Model' : model.state_dict(), 'Optim' : optimizer.state_dict(), 'epoch' : 10}
+- Typically store model params with a '.pth' extension. 
